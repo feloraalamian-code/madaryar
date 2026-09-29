@@ -2,9 +2,18 @@ import Link from "next/link";
 
 const sections = [
   {
+    href: "/self-care",
+    title: "برای خودم",
+    description: "چند لحظه فقط برای تو",
+    emoji: "🩷",
+    bgColor: "bg-purple-50",
+    borderColor: "border-purple-100",
+    textColor: "text-purple-800",
+  },
+  {
     href: "/home",
-    title: "خانه",
-    description: "کارهای روزمره و موجودی خانه",
+    title: "نظم خانه",
+    description: "نظم و آشپزی",
     emoji: "🏠",
     bgColor: "bg-blue-50",
     borderColor: "border-blue-100",
@@ -13,20 +22,11 @@ const sections = [
   {
     href: "/child",
     title: "کودک",
-    description: "رشد، واکسن و سلامت کودک",
+    description: "رشد، تغذیه و تربیت",
     emoji: "👶",
     bgColor: "bg-amber-50",
     borderColor: "border-amber-100",
     textColor: "text-amber-800",
-  },
-  {
-    href: "/self-care",
-    title: "برای خودم",
-    description: "چند لحظه برای خودت",
-    emoji: "💚",
-    bgColor: "bg-purple-50",
-    borderColor: "border-purple-100",
-    textColor: "text-purple-800",
   },
 ];
 
@@ -37,7 +37,7 @@ export default function LandingPage() {
         <header className="text-center space-y-3">
           <h1 className="text-4xl font-bold text-purple-800">مادریار</h1>
           <p className="text-sm text-gray-500 leading-relaxed">
-            همراه تو در مدیریت خانه و کودک
+            همراه تو در مسیر مادر بودن
           </p>
         </header>
 
@@ -63,9 +63,7 @@ export default function LandingPage() {
         </section>
 
         <footer className="text-center pt-4">
-          <p className="text-xs text-gray-400">
-            نسخه MVP — به زودی امکانات بیشتر
-          </p>
+          <p className="text-xs text-gray-400">نسخه MVP</p>
         </footer>
       </div>
     </main>
