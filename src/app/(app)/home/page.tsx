@@ -34,17 +34,6 @@ const sections = [
     descColor: "text-green-600",
     arrowColor: "text-green-400",
   },
-  {
-    href: "/home/money",
-    title: "پول و خرید",
-    description: "خرید هوشمند و پس‌انداز",
-    emoji: "💰",
-    bgColor: "bg-gradient-to-l from-yellow-50 to-amber-50",
-    borderColor: "border-yellow-100",
-    textColor: "text-yellow-800",
-    descColor: "text-yellow-700",
-    arrowColor: "text-yellow-500",
-  },
 ];
 
 export default function HomePage() {
