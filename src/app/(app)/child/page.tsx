@@ -79,6 +79,17 @@ const sections = [
     arrowColor: "text-fuchsia-400",
   },
   {
+    href: "/child/emotional-regulation",
+    title: "تنظیم هیجانی",
+    description: "چطور آروم بشه و کنترل کنه",
+    emoji: "🧘",
+    bgColor: "bg-gradient-to-l from-teal-50 to-emerald-50",
+    borderColor: "border-teal-100",
+    textColor: "text-teal-800",
+    descColor: "text-teal-600",
+    arrowColor: "text-teal-400",
+  },
+  {
     href: "/child/books",
     title: "کتاب‌های تربیتی",
     description: "۱۵ کتاب پیشنهادی",
