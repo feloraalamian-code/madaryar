@@ -5,6 +5,7 @@ import data from "@/content/child/pregnancy/preparation.json";
 
 export default function PreparationPage() {
   const [openId, setOpenId] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <div className="space-y-6 pb-8">
@@ -20,6 +21,9 @@ export default function PreparationPage() {
       <section className="space-y-3">
         {data.topics.map((topic) => {
           const isOpen = openId === topic.id;
+          const isExpanded = expandedId === topic.id;
+          const isLong = topic.body.length > 200;
+
           return (
             <div
               key={topic.id}
@@ -49,9 +53,28 @@ export default function PreparationPage() {
 
               {isOpen && (
                 <div className="px-4 pb-4 pt-1 border-t border-amber-100">
-                  <p className="text-xs text-amber-800 leading-loose whitespace-pre-line">
+                  <div
+                    className={`relative text-xs text-amber-800 leading-loose whitespace-pre-line transition-all ${
+                      !isExpanded && isLong ? "max-h-40 overflow-hidden" : ""
+                    }`}
+                  >
                     {topic.body}
-                  </p>
+
+                    {!isExpanded && isLong && (
+                      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+                    )}
+                  </div>
+
+                  {isLong && (
+                    <button
+                      onClick={() =>
+                        setExpandedId(isExpanded ? null : topic.id)
+                      }
+                      className="mt-3 text-xs font-semibold text-amber-600 hover:text-amber-800 transition-colors"
+                    >
+                      {isExpanded ? "↑ بستن" : "↓ ادامه مطلب"}
+                    </button>
+                  )}
                 </div>
               )}
             </div>

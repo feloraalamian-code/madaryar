@@ -38,14 +38,22 @@ export default function Child6To12Page() {
                 {card.startText}
               </p>
 
-              {/* بخش‌های درختی */}
-              <div className="mt-4 space-y-4">
+              {/* بخش‌های درختی (آکاردئون تودرتو) */}
+              <div className="mt-4 space-y-3">
                 {card.sections.map((section, idx) => (
-                  <div key={idx}>
-                    <h3 className="font-semibold text-gray-700 text-sm mb-2">
-                      ● {section.title}
-                    </h3>
-                    <ul className="space-y-1 pr-4 border-r-2 border-gray-100">
+                  <details
+                    key={idx}
+                    className="bg-gray-50 rounded-xl overflow-hidden group/section"
+                  >
+                    <summary className="flex items-center justify-between p-3 cursor-pointer list-none">
+                      <h3 className="font-semibold text-gray-700 text-sm">
+                        ● {section.title}
+                      </h3>
+                      <span className="text-gray-400 text-xs group-open/section:rotate-90 transition-transform">
+                        ←
+                      </span>
+                    </summary>
+                    <ul className="space-y-1 px-3 pb-3 pr-6 border-r-2 border-gray-200 mr-3">
                       {section.items.map((item, i) => (
                         <li
                           key={i}
@@ -56,7 +64,7 @@ export default function Child6To12Page() {
                         </li>
                       ))}
                     </ul>
-                  </div>
+                  </details>
                 ))}
               </div>
 

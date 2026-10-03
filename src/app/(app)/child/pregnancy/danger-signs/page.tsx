@@ -5,6 +5,7 @@ import data from "@/content/child/pregnancy/danger-signs.json";
 
 export default function DangerSignsPage() {
   const [openId, setOpenId] = useState<number | null>(null);
+  const [expandedId, setExpandedId] = useState<number | null>(null);
 
   return (
     <div className="space-y-6 pb-8">
@@ -37,6 +38,9 @@ export default function DangerSignsPage() {
       <section className="space-y-3">
         {data.signs.map((sign) => {
           const isOpen = openId === sign.id;
+          const isExpanded = expandedId === sign.id;
+          const isLong = sign.body.length > 200;
+
           return (
             <div
               key={sign.id}
@@ -63,9 +67,31 @@ export default function DangerSignsPage() {
 
               {isOpen && (
                 <div className="px-4 pb-4 pt-1 border-t border-red-100">
-                  <p className="text-xs text-red-800 leading-loose whitespace-pre-line">
+                  {/* متن با محدودیت ارتفاع */}
+                  <div
+                    className={`relative text-xs text-red-800 leading-loose whitespace-pre-line transition-all ${
+                      !isExpanded && isLong ? "max-h-40 overflow-hidden" : ""
+                    }`}
+                  >
                     {sign.body}
-                  </p>
+
+                    {/* گرادیان محو شدن */}
+                    {!isExpanded && isLong && (
+                      <div className="absolute bottom-0 left-0 right-0 h-16 bg-gradient-to-t from-white to-transparent" />
+                    )}
+                  </div>
+
+                  {/* دکمه ادامه مطلب */}
+                  {isLong && (
+                    <button
+                      onClick={() =>
+                        setExpandedId(isExpanded ? null : sign.id)
+                      }
+                      className="mt-3 text-xs font-semibold text-red-600 hover:text-red-800 transition-colors"
+                    >
+                      {isExpanded ? "↑ بستن" : "↓ ادامه مطلب"}
+                    </button>
+                  )}
                 </div>
               )}
             </div>
