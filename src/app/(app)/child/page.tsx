@@ -2,6 +2,17 @@ import Link from "next/link";
 
 const sections = [
   {
+    href: "/child/vaccines",
+    title: "واکسن‌ها",
+    description: "برنامه واکسیناسیون کودک",
+    emoji: "💉",
+    bgColor: "bg-gradient-to-l from-cyan-50 to-sky-50",
+    borderColor: "border-cyan-100",
+    textColor: "text-cyan-800",
+    descColor: "text-cyan-600",
+    arrowColor: "text-cyan-400",
+  },
+  {
     href: "/child/pregnancy",
     title: "بارداری و زایمان",
     description: "از بارداری تا بعد از زایمان",
@@ -107,9 +118,7 @@ export default function ChildPage() {
     <div className="space-y-6 pb-8">
       <header className="pt-4 text-center space-y-2">
         <h1 className="text-3xl font-bold text-pink-800">👶 کودک</h1>
-        <p className="text-sm text-gray-500">
-          از بارداری تا نوجوانی
-        </p>
+        <p className="text-sm text-gray-500">از بارداری تا نوجوانی</p>
       </header>
 
       <section className="space-y-4">
