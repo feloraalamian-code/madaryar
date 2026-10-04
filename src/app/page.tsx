@@ -95,7 +95,6 @@ export default function MainPage() {
     (s) => s.title.includes(search) || s.description.includes(search)
   );
 
-  // جستجوی سراسری
   const searchResults =
     search.trim().length > 0
       ? allContent.filter(
@@ -109,11 +108,10 @@ export default function MainPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-pink-50 via-white to-purple-50 pb-8">
       <div className="max-w-md mx-auto px-4">
-        {/* هدر گرادیانت */}
+        {/* هدر */}
         <header className="relative bg-gradient-to-br from-pink-400 via-rose-400 to-purple-400 rounded-3xl px-5 py-5 mt-4 shadow-md overflow-hidden">
           <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-8 -mt-8" />
           <div className="absolute bottom-0 left-0 w-16 h-16 bg-white/10 rounded-full -ml-6 -mb-6" />
-
           <div className="relative">
             <h1 className="text-xl font-bold text-white drop-shadow-sm">
               مادریار 🌸
@@ -127,7 +125,7 @@ export default function MainPage() {
           </div>
         </header>
 
-        {/* نوار آمار */}
+        {/* آمار */}
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-3 mt-4">
           <div className="grid grid-cols-3 gap-2 text-center">
             <div>
@@ -151,7 +149,7 @@ export default function MainPage() {
           </div>
         </div>
 
-        {/* نوار جستجو */}
+        {/* جستجو */}
         <div className="relative mt-4">
           <input
             type="text"
@@ -170,7 +168,6 @@ export default function MainPage() {
           )}
         </div>
 
-        {/* حالت جستجو */}
         {isSearching ? (
           <div className="mt-4">
             <p className="text-xs text-gray-500 mb-3 px-1">
@@ -178,7 +175,6 @@ export default function MainPage() {
                 ? `${searchResults.length} نتیجه پیدا شد`
                 : "چیزی پیدا نشد 🤷‍♀️"}
             </p>
-
             <div className="space-y-2">
               {searchResults.map((item, idx) => (
                 <Link
@@ -209,7 +205,6 @@ export default function MainPage() {
           </div>
         ) : (
           <>
-            {/* کارت پیشنهاد امروز */}
             <div className="mt-4">
               <Link
                 href={tip.link}
@@ -230,7 +225,6 @@ export default function MainPage() {
               </Link>
             </div>
 
-            {/* کارت‌های اصلی */}
             <section className="mt-4 space-y-3">
               {filteredSections.length === 0 ? (
                 <div className="text-center text-sm text-gray-400 py-8">
@@ -247,7 +241,6 @@ export default function MainPage() {
                       <div className="w-14 h-14 bg-white/70 rounded-2xl flex items-center justify-center shadow-sm flex-shrink-0">
                         <span className="text-2xl">{section.emoji}</span>
                       </div>
-
                       <div className="flex-1 text-right">
                         <h2 className={`text-lg font-bold ${section.textColor}`}>
                           {section.title}
@@ -256,7 +249,6 @@ export default function MainPage() {
                           {section.description}
                         </p>
                       </div>
-
                       <span className={`${section.descColor} text-xl opacity-60`}>
                         ←
                       </span>
@@ -268,11 +260,23 @@ export default function MainPage() {
           </>
         )}
 
-        {/* فوتر */}
         <div className="mt-6 bg-pink-50 rounded-2xl p-4 border border-pink-100 text-xs text-pink-600 leading-relaxed text-center">
           💕 همراه تو در مسیر مادر بودن.
         </div>
       </div>
+
+      {/* 🎯 دکمه چت با AI */}
+      <Link
+        href="/chat"
+        className="fixed bottom-40 left-4 right-4 z-[60] bg-gradient-to-l from-pink-500 to-purple-500 shadow-xl rounded-2xl py-3 px-4 flex items-center justify-center gap-2 hover:shadow-2xl transition-all active:scale-95 max-w-md mx-auto"
+        aria-label="چت با دستیار مادریار"
+      >
+        <span className="text-2xl">🤖</span>
+        <span className="text-white font-bold text-sm">
+          چت با هوش مصنوعی مادریار
+        </span>
+        <span className="absolute top-2 right-3 w-2 h-2 bg-green-400 rounded-full border border-white animate-pulse"></span>
+      </Link>
     </div>
   );
 }
