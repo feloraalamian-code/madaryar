@@ -1,6 +1,4 @@
 import Link from "next/link";
-import giftsData from "@/content/self-care/gifts.json";
-import challengesData from "@/content/self-care/challenges.json";
 
 const sections = [
   {
@@ -50,7 +48,7 @@ const sections = [
   {
     href: "/self-care/heart",
     title: "قلب زنانه",
-    description: "زنانگی و مادری",
+    description: "زنانگی و خودمراقبتی",
     emoji: "💜",
     bgColor: "bg-gradient-to-l from-violet-50 to-purple-50",
     borderColor: "border-violet-100",
@@ -63,17 +61,15 @@ const sections = [
 export default function SelfCarePage() {
   return (
     <div className="space-y-6 pb-8">
-      {/* Header */}
       <header className="pt-4 text-center space-y-2">
         <h1 className="text-3xl font-bold text-purple-800">
-          💜 وقت خودم
+          🌸 آرامش من
         </h1>
         <p className="text-sm text-gray-500">
           چند لحظه فقط برای تو
         </p>
       </header>
 
-      {/* کارت‌ها */}
       <section className="space-y-4">
         {sections.map((section) => (
           <Link
@@ -101,7 +97,6 @@ export default function SelfCarePage() {
         ))}
       </section>
 
-      {/* Footer */}
       <div className="bg-purple-50 rounded-2xl p-4 border border-purple-100 text-xs text-purple-600 leading-relaxed text-center">
         💜 این بخش برای حمایت از توست، نه جایگزین کمک تخصصی.
       </div>

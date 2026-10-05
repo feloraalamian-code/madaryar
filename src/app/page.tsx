@@ -7,9 +7,9 @@ import { allContent } from "@/content/allContent";
 const sections = [
   {
     href: "/self-care",
-    title: "وقت خودم",
+    title: "آرامش من",
     description: "به خودت هم اهمیت بده",
-    emoji: "💜",
+    emoji: "🌸",
     bgColor: "bg-gradient-to-br from-purple-50 via-pink-50 to-rose-50",
     borderColor: "border-purple-100",
     textColor: "text-purple-800",
@@ -265,7 +265,7 @@ export default function MainPage() {
         </div>
       </div>
 
-      {/* 🎯 دکمه چت با AI */}
+      {/* دکمه چت با AI */}
       <Link
         href="/chat"
         className="fixed bottom-40 left-4 right-4 z-[60] bg-gradient-to-l from-pink-500 to-purple-500 shadow-xl rounded-2xl py-3 px-4 flex items-center justify-center gap-2 hover:shadow-2xl transition-all active:scale-95 max-w-md mx-auto"

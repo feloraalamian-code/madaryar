@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import data from "@/content/self-care/heart/mom.json";
+import Link from "next/link";
+import data from "@/content/child/upbringing/motherhood.json";
 
 export default function MotherhoodPage() {
   const [openId, setOpenId] = useState<number | null>(null);
@@ -9,7 +10,15 @@ export default function MotherhoodPage() {
   return (
     <div className="space-y-6 pb-8">
       <header className="pt-4 text-center space-y-2">
-        <h1 className="text-2xl font-bold text-purple-800">👩‍🍼 مادری</h1>
+        <Link
+          href="/content/child/upbringing"
+          className="text-xs text-gray-500 mb-2 inline-block"
+        >
+          → برگشت
+        </Link>
+        <h1 className="text-2xl font-bold text-purple-800">
+          👩‍🍼 مادری
+        </h1>
         <p className="text-sm text-gray-500">برای مادر بودنت</p>
       </header>
 

@@ -1,4 +1,4 @@
-import BottomNav from "./BottomNav";
+import BottomNav from "@/components/BottomNav";
 import FloatingChatButton from "@/components/FloatingChatButton";
 
 export default function AppLayout({

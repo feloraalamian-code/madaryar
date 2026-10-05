@@ -13,6 +13,17 @@ const sections = [
     arrowColor: "text-cyan-400",
   },
   {
+    href: "/child/breastfeeding",
+    title: "شیردهی",
+    description: "راهنما و تایمر",
+    emoji: "🍼",
+    bgColor: "bg-gradient-to-l from-pink-50 to-rose-50",
+    borderColor: "border-pink-100",
+    textColor: "text-pink-800",
+    descColor: "text-pink-600",
+    arrowColor: "text-pink-400",
+  },
+  {
     href: "/child/pregnancy",
     title: "بارداری و زایمان",
     description: "از بارداری تا بعد از زایمان",
