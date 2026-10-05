@@ -4,7 +4,7 @@ const sections = [
   {
     href: "/home/cooking",
     title: "آشپزی",
-    description: "غذا و دستورهای ساده",
+    description: "امروز چی بپزم؟",
     emoji: "🍳",
     bgColor: "bg-gradient-to-l from-amber-50 to-orange-50",
     borderColor: "border-amber-100",
@@ -14,9 +14,9 @@ const sections = [
   },
   {
     href: "/home/cleaning",
-    title: "تمیزی",
-    description: "راهنمای تمیز کردن خانه",
-    emoji: "🧽",
+    title: "تمیزی و نظم",
+    description: "چیکار کنم تو خونه؟",
+    emoji: "🧹",
     bgColor: "bg-gradient-to-l from-cyan-50 to-blue-50",
     borderColor: "border-cyan-100",
     textColor: "text-cyan-800",
@@ -24,10 +24,21 @@ const sections = [
     arrowColor: "text-cyan-400",
   },
   {
-    href: "/home/beauty",
-    title: "زیبایی خانه",
-    description: "چیدمان و دکور",
-    emoji: "🌿",
+    href: "/home/inventory",
+    title: "موجودی منزل",
+    description: "چی دارم، چی کم دارم",
+    emoji: "📦",
+    bgColor: "bg-gradient-to-l from-violet-50 to-purple-50",
+    borderColor: "border-violet-100",
+    textColor: "text-violet-800",
+    descColor: "text-violet-600",
+    arrowColor: "text-violet-400",
+  },
+  {
+    href: "/home/finance",
+    title: "دخل و خرج",
+    description: "مدیریت خرج خونه",
+    emoji: "💰",
     bgColor: "bg-gradient-to-l from-green-50 to-emerald-50",
     borderColor: "border-green-100",
     textColor: "text-green-800",
@@ -41,9 +52,7 @@ export default function HomePage() {
     <div className="space-y-6 pb-8">
       <header className="pt-4 text-center space-y-2">
         <h1 className="text-3xl font-bold text-blue-800">🏠 خانه</h1>
-        <p className="text-sm text-gray-500">
-          مدیریت و زیبایی خانه
-        </p>
+        <p className="text-sm text-gray-500">مدیریت و نظم خانه</p>
       </header>
 
       <section className="space-y-4">
