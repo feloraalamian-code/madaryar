@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-// کارت‌های اصلی (بالا)
 const mainCards = [
   {
     href: "/child/growth",
@@ -28,9 +27,19 @@ const mainCards = [
     descColor: "text-amber-700",
     arrowColor: "text-amber-500",
   },
+  {
+    href: "/child/memories",
+    title: "خاطرات کودک",
+    description: "لحظه‌های قشنگ رو ثبت کن",
+    emoji: "📸",
+    bgColor: "bg-gradient-to-l from-purple-100 via-pink-100 to-rose-100",
+    borderColor: "border-purple-200",
+    textColor: "text-purple-900",
+    descColor: "text-purple-700",
+    arrowColor: "text-purple-500",
+  },
 ];
 
-// گروه‌های آکاردئون (پایین)
 const groups = [
   {
     id: "growth-stages",
@@ -194,7 +203,7 @@ export default function ChildPage() {
         <p className="text-sm text-gray-500">از بارداری تا نوجوانی</p>
       </header>
 
-      {/* کارت‌های اصلی (بالا) */}
+      {/* کارت‌های اصلی */}
       <section className="space-y-3">
         {mainCards.map((card) => (
           <Link
@@ -229,7 +238,7 @@ export default function ChildPage() {
         <div className="flex-1 h-px bg-gray-200"></div>
       </div>
 
-      {/* گروه‌های آکاردئون */}
+      {/* گروه‌ها */}
       <section className="space-y-3">
         {groups.map((group) => {
           const isOpen = openGroups.includes(group.id);
