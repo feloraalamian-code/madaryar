@@ -1,0 +1,14 @@
+{
+  "expenseCategories": [
+    { "id": "supermarket", "icon": "🛒", "label": "سوپرمارکت" },
+    { "id": "fruits", "icon": "🍎", "label": "میوه و تره‌بار" },
+    { "id": "protein", "icon": "🥩", "label": "پروتئینی" },
+    { "id": "child", "icon": "👶", "label": "خرید کودک" },
+    { "id": "installment", "icon": "💳", "label": "قسط" },
+    { "id": "bills", "icon": "🏠", "label": "قبوض" },
+    { "id": "car", "icon": "🚗", "label": "ماشین / بنزین" },
+    { "id": "personal", "icon": "🛍️", "label": "خرید شخصی" },
+    { "id": "fun", "icon": "🎡", "label": "تفریحی" },
+    { "id": "other", "icon": "❓", "label": "متفرقه" }
+  ]
+}
