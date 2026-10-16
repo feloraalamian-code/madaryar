@@ -129,7 +129,7 @@ export default function FunPage() {
                 {selectedCategory === "book" && `اثر ${currentItem.author}`}
                 {selectedCategory === "podcast" && currentItem.host}
                 {selectedCategory === "movie" &&
-                  `کارگردان: ${currentItem.director}`}
+                  `کارگردان: ${currentItem.author}`}
               </p>
               {currentItem.year && (
                 <p className="text-xs text-gray-500 mt-2">
@@ -271,7 +271,7 @@ export default function FunPage() {
               {selectedCategory === "book" && `اثر ${currentItem.author}`}
               {selectedCategory === "podcast" && currentItem.host}
               {selectedCategory === "movie" &&
-                `کارگردان: ${currentItem.director}`}
+                `کارگردان: ${currentItem.author}`}
             </p>
 
             {currentItem.year && (

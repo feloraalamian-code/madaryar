@@ -6,7 +6,9 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 
 type ChildProfile = {
   name: string;
-  birthDate: string;
+  birthYear: string;
+  birthMonth: string;
+  birthDay: string;
 };
 
 type Measurement = {
@@ -32,7 +34,9 @@ export default function GrowthPage() {
 
   // فرم پروفایل
   const [name, setName] = useState("");
-  const [birthDate, setBirthDate] = useState("");
+  const [birthYear, setBirthYear] = useState("");
+  const [birthMonth, setBirthMonth] = useState("");
+  const [birthDay, setBirthDay] = useState("");
 
   // فرم اندازه‌گیری
   const [height, setHeight] = useState("");
@@ -44,20 +48,34 @@ export default function GrowthPage() {
   }, []);
 
   const saveProfile = () => {
-    if (!name.trim() || !birthDate.trim()) {
-      alert("لطفاً اسم و تاریخ تولد رو وارد کن");
+    if (
+      !name.trim() ||
+      !birthYear.trim() ||
+      !birthMonth.trim() ||
+      !birthDay.trim()
+    ) {
+      alert("لطفاً همه فیلدها رو پر کن");
       return;
     }
-    setProfile({ name: name.trim(), birthDate: birthDate.trim() });
+    setProfile({
+      name: name.trim(),
+      birthYear: birthYear.trim(),
+      birthMonth: birthMonth.trim(),
+      birthDay: birthDay.trim(),
+    });
     setEditProfile(false);
     setName("");
-    setBirthDate("");
+    setBirthYear("");
+    setBirthMonth("");
+    setBirthDay("");
   };
 
   const openEditProfile = () => {
     if (profile) {
       setName(profile.name);
-      setBirthDate(profile.birthDate);
+      setBirthYear(profile.birthYear);
+      setBirthMonth(profile.birthMonth);
+      setBirthDay(profile.birthDay);
     }
     setEditProfile(true);
   };
@@ -91,14 +109,18 @@ export default function GrowthPage() {
     setMeasurements(measurements.filter((m) => m.id !== id));
   };
 
-  const calcAge = (birthDate: string) => {
+  const calcAge = (year: string, month: string, day: string) => {
     try {
-      // فرض: تاریخ شمسی
-      const parts = birthDate.split("/").map((p) => parseInt(p));
-      if (parts.length !== 3) return "—";
+      const by = parseInt(year);
+      const bm = parseInt(month);
+      const bd = parseInt(day);
 
-      const [by, bm, bd] = parts;
-      const today = new Date().toLocaleDateString("fa-IR").split("/").map((p) => parseInt(p));
+      if (isNaN(by) || isNaN(bm) || isNaN(bd)) return "—";
+
+      const today = new Date()
+        .toLocaleDateString("fa-IR")
+        .split("/")
+        .map((p) => parseInt(p));
       const [ty, tm, td] = today;
 
       let years = ty - by;
@@ -114,13 +136,9 @@ export default function GrowthPage() {
         months += 12;
       }
 
-      if (years > 0) {
-        return `${years} سال و ${months} ماه`;
-      } else if (months > 0) {
-        return `${months} ماه و ${days} روز`;
-      } else {
-        return `${days} روز`;
-      }
+      if (years > 0) return `${years} سال و ${months} ماه`;
+      else if (months > 0) return `${months} ماه و ${days} روز`;
+      else return `${days} روز`;
     } catch {
       return "—";
     }
@@ -179,9 +197,18 @@ export default function GrowthPage() {
           <h1 className="text-2xl font-bold text-pink-800">👶 پروفایل کودک</h1>
         </header>
 
-        <div className="bg-white rounded-3xl p-5 border border-pink-100 shadow-sm space-y-4">
+        <Link
+          href="/child"
+          className="text-xs text-pink-600 flex items-center gap-1"
+        >
+          → برگشت
+        </Link>
+
+        <div className="bg-white rounded-3xl p-5 border border-pink-100 shadow-sm space-y-5">
           <div>
-            <label className="text-xs text-gray-600 mb-1 block">اسم کودک</label>
+            <label className="text-xs text-gray-600 mb-2 block font-bold">
+              اسم کودک
+            </label>
             <input
               type="text"
               value={name}
@@ -192,25 +219,53 @@ export default function GrowthPage() {
           </div>
 
           <div>
-            <label className="text-xs text-gray-600 mb-1 block">
+            <label className="text-xs text-gray-600 mb-2 block font-bold">
               تاریخ تولد (شمسی)
             </label>
-            <input
-              type="text"
-              value={birthDate}
-              onChange={(e) => setBirthDate(e.target.value)}
-              placeholder="مثلاً ۱۴۰۱/۰۱/۱۵"
-              className="w-full bg-gray-50 border border-gray-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-pink-400"
-              dir="ltr"
-            />
-            <p className="text-[10px] text-gray-400 mt-1">
-              فرمت: سال/ماه/روز (۱۴۰۱/۰۱/۱۵)
-            </p>
+            <div className="grid grid-cols-3 gap-2">
+              <div>
+                <input
+                  type="number"
+                  value={birthYear}
+                  onChange={(e) => setBirthYear(e.target.value)}
+                  placeholder="۱۴۰۱"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-3 text-sm text-center focus:outline-none focus:border-pink-400"
+                  dir="ltr"
+                />
+                <p className="text-[9px] text-gray-400 text-center mt-1">سال</p>
+              </div>
+              <div>
+                <input
+                  type="number"
+                  value={birthMonth}
+                  onChange={(e) => setBirthMonth(e.target.value)}
+                  placeholder="۰۱"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-3 text-sm text-center focus:outline-none focus:border-pink-400"
+                  dir="ltr"
+                  min="1"
+                  max="12"
+                />
+                <p className="text-[9px] text-gray-400 text-center mt-1">ماه</p>
+              </div>
+              <div>
+                <input
+                  type="number"
+                  value={birthDay}
+                  onChange={(e) => setBirthDay(e.target.value)}
+                  placeholder="۱۵"
+                  className="w-full bg-gray-50 border border-gray-200 rounded-xl px-3 py-3 text-sm text-center focus:outline-none focus:border-pink-400"
+                  dir="ltr"
+                  min="1"
+                  max="31"
+                />
+                <p className="text-[9px] text-gray-400 text-center mt-1">روز</p>
+              </div>
+            </div>
           </div>
 
           <button
             onClick={saveProfile}
-            className="w-full bg-gradient-to-l from-pink-500 to-rose-500 text-white font-bold py-3 rounded-2xl active:scale-95 transition-all"
+            className="w-full bg-gradient-to-l from-pink-500 to-rose-500 text-white font-bold py-4 rounded-2xl active:scale-95 transition-all"
           >
             ✅ ذخیره
           </button>
@@ -244,25 +299,34 @@ export default function GrowthPage() {
       </Link>
 
       {/* پروفایل */}
-      <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-5 border border-pink-100 shadow-sm">
-        <div className="flex items-center gap-4">
-          <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm">
-            👶
+      {profile && (
+        <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-3xl p-5 border border-pink-100 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="w-16 h-16 bg-white rounded-2xl flex items-center justify-center text-3xl shadow-sm">
+              👶
+            </div>
+            <div className="flex-1">
+              <h2 className="text-lg font-bold text-pink-900">
+                {profile.name}
+              </h2>
+              <p className="text-xs text-pink-600 mt-1">
+                🎂{" "}
+                {calcAge(
+                  profile.birthYear,
+                  profile.birthMonth,
+                  profile.birthDay
+                )}
+              </p>
+            </div>
+            <button
+              onClick={openEditProfile}
+              className="text-pink-400 text-xl"
+            >
+              ✏️
+            </button>
           </div>
-          <div className="flex-1">
-            <h2 className="text-lg font-bold text-pink-900">{profile.name}</h2>
-            <p className="text-xs text-pink-600 mt-1">
-              🎂 {calcAge(profile.birthDate)}
-            </p>
-          </div>
-          <button
-            onClick={openEditProfile}
-            className="text-pink-400 text-xl"
-          >
-            ✏️
-          </button>
         </div>
-      </div>
+      )}
 
       {/* آخرین اندازه‌گیری */}
       {lastMeasurement ? (
@@ -294,7 +358,9 @@ export default function GrowthPage() {
               </div>
               {lastMeasurement.headSize > 0 && (
                 <div className="bg-pink-50 rounded-2xl p-3 text-center">
-                  <div className="text-[10px] text-pink-600 mb-1">🔵 دور سر</div>
+                  <div className="text-[10px] text-pink-600 mb-1">
+                    🔵 دور سر
+                  </div>
                   <div className="text-lg font-bold text-pink-900">
                     {lastMeasurement.headSize}
                   </div>
@@ -303,7 +369,6 @@ export default function GrowthPage() {
               )}
             </div>
 
-            {/* روند رشد */}
             {measurements.length > 1 && (
               <div className="mt-4 bg-green-50 rounded-2xl p-3 border border-green-100">
                 <p className="text-xs text-green-700">
@@ -317,7 +382,7 @@ export default function GrowthPage() {
             )}
           </div>
 
-          {/* نمودار ساده */}
+          {/* نمودار */}
           {measurements.length > 1 && (
             <div className="bg-white rounded-3xl p-5 border border-pink-100 shadow-sm">
               <h3 className="font-bold text-gray-800 text-sm mb-4">
@@ -325,7 +390,7 @@ export default function GrowthPage() {
               </h3>
 
               <div className="h-32 flex items-end gap-2">
-                {measurements.map((m, idx) => {
+                {measurements.map((m) => {
                   const maxHeight = Math.max(
                     ...measurements.map((x) => x.height)
                   );
@@ -337,7 +402,10 @@ export default function GrowthPage() {
                     ((m.height - minHeight) / range) * 100 + 20;
 
                   return (
-                    <div key={m.id} className="flex-1 flex flex-col items-center">
+                    <div
+                      key={m.id}
+                      className="flex-1 flex flex-col items-center"
+                    >
                       <div className="text-[9px] text-gray-600 mb-1">
                         {m.height}
                       </div>

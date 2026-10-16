@@ -124,6 +124,13 @@ export default function ChallengesPage() {
       ? activeChallenge.completedDays.length >= active.duration
       : false;
 
+  const progressPercent =
+    active && activeChallenge
+      ? Math.round(
+          (activeChallenge.completedDays.length / active.duration) * 100
+        )
+      : 0;
+
   return (
     <div className="space-y-4 pb-8">
       <header className="pt-4 text-center space-y-2">
@@ -143,6 +150,7 @@ export default function ChallengesPage() {
       {/* چالش فعال */}
       {active && activeChallenge && !isCompleted && (
         <div className="bg-gradient-to-br from-amber-50 to-orange-50 rounded-3xl p-6 border border-amber-200 shadow-md">
+          {/* هدر */}
           <div className="text-center space-y-3 mb-5">
             <div className="text-5xl">{active.icon}</div>
             <h2 className="text-xl font-bold text-amber-900">
@@ -153,6 +161,7 @@ export default function ChallengesPage() {
             </p>
           </div>
 
+          {/* کار امروز */}
           <div className="bg-white/70 rounded-2xl p-4 mb-4">
             <p className="text-[10px] text-amber-600 font-bold mb-2">
               🎯 کار امروز:
@@ -162,20 +171,47 @@ export default function ChallengesPage() {
             </p>
           </div>
 
-          {/* پیشرفت */}
-          <div className="flex gap-1.5 mb-5">
-            {Array.from({ length: active.duration }).map((_, idx) => (
+          {/* نوار پیشرفت درصدی */}
+          <div className="mb-5">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-[10px] text-amber-600 font-bold">
+                📊 پیشرفت
+              </span>
+              <span className="text-xs text-amber-800 font-bold">
+                {progressPercent}٪
+              </span>
+            </div>
+            <div className="w-full bg-amber-200 rounded-full h-3 overflow-hidden">
               <div
-                key={idx}
-                className={`h-2 flex-1 rounded-full transition-all ${
-                  idx < activeChallenge.completedDays.length
-                    ? "bg-amber-500"
-                    : "bg-amber-200"
-                }`}
+                className="h-3 rounded-full bg-gradient-to-l from-amber-400 to-orange-500 transition-all duration-500"
+                style={{ width: `${progressPercent}%` }}
               />
-            ))}
+            </div>
           </div>
 
+          {/* دایره‌های روز */}
+          <div className="flex gap-1.5 mb-5">
+            {Array.from({ length: active.duration }).map((_, idx) => {
+              const isDone = idx < activeChallenge.completedDays.length;
+              const isToday = idx === activeChallenge.completedDays.length;
+              return (
+                <div
+                  key={idx}
+                  className={`h-8 flex-1 rounded-lg flex items-center justify-center text-[10px] font-bold transition-all ${
+                    isDone
+                      ? "bg-amber-500 text-white"
+                      : isToday
+                      ? "bg-amber-300 text-amber-900 border-2 border-amber-500"
+                      : "bg-amber-100 text-amber-400"
+                  }`}
+                >
+                  {isDone ? "✓" : idx + 1}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* دکمه‌ها */}
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={completeToday}
@@ -203,6 +239,15 @@ export default function ChallengesPage() {
           <p className="text-sm text-green-600 mb-5">
             {active.duration} روز را پشت سر گذاشتی. آفرین بهت 🌿
           </p>
+
+          {/* نوار پیشرفت ۱۰۰٪ */}
+          <div className="w-full bg-green-200 rounded-full h-3 overflow-hidden mb-5">
+            <div
+              className="h-3 rounded-full bg-gradient-to-l from-green-400 to-emerald-500"
+              style={{ width: "100%" }}
+            />
+          </div>
+
           <button
             onClick={resetChallenge}
             className="w-full bg-gradient-to-l from-green-500 to-emerald-500 text-white font-bold py-3 rounded-2xl active:scale-95 transition-all"
@@ -233,6 +278,14 @@ export default function ChallengesPage() {
                   <p className="text-xs text-gray-500 mt-1 leading-relaxed">
                     {challenge.description}
                   </p>
+                  <div className="flex items-center gap-2 mt-2">
+                    <span className="text-[10px] bg-amber-100 text-amber-700 px-2 py-0.5 rounded-full">
+                      {challenge.duration} روز
+                    </span>
+                    <span className="text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
+                      {challenge.category === "self" ? "👩 خودم" : "👶 کودک"}
+                    </span>
+                  </div>
                 </div>
               </div>
 
